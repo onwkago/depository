@@ -30,3 +30,11 @@ build/
 
 ### VS Code ###
 .vscode/
+
+### maven portable ###
+.mvn/
+mvnw
+mvnw.cmd
+
+### logs directory ###
+/logs
