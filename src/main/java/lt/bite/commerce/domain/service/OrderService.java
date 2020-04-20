@@ -15,4 +15,6 @@ public interface OrderService {
   ResponseEntity<OrderedServiceDto>  cancelOrderedService(OrderedServiceDto customer);
 
   ResponseEntity<List<OrderedServiceDto>> getActiveOrders(Long accountId);
+
+  ResponseEntity<OrderedServiceDto> getOrder(Long orderId);
 }

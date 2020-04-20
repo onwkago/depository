@@ -47,9 +47,15 @@ public class OrderController {
     return orderService.getActiveOrders(accountId);
   }
 
+  @GetMapping(path= Urls.GET_ORDER)
+  public HttpEntity<OrderedServiceDto> getOrder(@RequestParam(name="orderId") Long orderId) {
+    return orderService.getOrder(orderId);
+  }
+
 
   public final static class Urls{
     private final static String ROOT_URL = ApiUrls.API_URL + "/service";
+    private final static String GET_ORDER = ApiUrls.API_URL + "/order";
     private final static String GET_ACTIVE_ORDERS = ApiUrls.API_URL + "/activeOrders";
     private final static String GET_CUSTOMER = ROOT_URL + "/getcustomer";
     private final static String CANCEL_ORDER = ROOT_URL + "/cancelorder";

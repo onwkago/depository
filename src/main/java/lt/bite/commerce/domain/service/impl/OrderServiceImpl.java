@@ -1,5 +1,6 @@
 package lt.bite.commerce.domain.service.impl;
 
+import lt.bite.commerce.controller.orders.OrderController;
 import lt.bite.commerce.domain.model.OrderedServiceDto;
 import lt.bite.commerce.domain.service.AccountService;
 import lt.bite.commerce.domain.service.OrderService;
@@ -20,6 +21,9 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
+
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
+import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
 @Service
 public class OrderServiceImpl implements OrderService {
@@ -61,9 +65,17 @@ public class OrderServiceImpl implements OrderService {
             .stream()
             .filter(m -> m.getActiveTo() != null)
             .filter(m -> m.getActiveTo().isBefore(LocalDateTime.now()))
-            .map(m -> mapper.map(m,OrderedServiceDto.class))
+            .map(m -> mapper.map(m,OrderedServiceDto.class)
+                    .add(linkTo(methodOn(OrderController.class).getOrder(m.getId())).withSelfRel()))
             .collect(Collectors.toList());
 
     return new ResponseEntity<>(activeServices,HttpStatus.OK);
+  }
+
+  @Override
+  public ResponseEntity<OrderedServiceDto> getOrder(Long orderId) {
+    OrderedServiceDto order = mapper.map(orderedServiceRepository.findById(orderId),OrderedServiceDto.class);
+    order.add(linkTo(methodOn(OrderController.class).getOrder(order.getId())).withSelfRel());
+    return new ResponseEntity<>(order,HttpStatus.OK);
   }
 }
