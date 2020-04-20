@@ -21,12 +21,10 @@ public class Account {
 
   private String name;
 
-  @OneToMany(mappedBy = "id")
+  @OneToMany(mappedBy = "id", fetch=FetchType.LAZY)
   private List<Address> addresses;
 
   @OneToMany(mappedBy = "id")
   private List<Msisdn> msisdnList;
 
-  @ManyToOne
-  private Customer customer;
 }

@@ -30,6 +30,4 @@ public class Msisdn {
   @OneToMany(mappedBy = "id")
   private List<OrderedService> orderedServices;
 
-  @ManyToOne
-  private Account account;
 }

@@ -19,10 +19,10 @@ public class OrderedService {
   @Generated
   private long id;
 
-  @ManyToOne
+  @OneToOne
   private Service service;
 
-  @ManyToOne
+  @OneToOne
   private Msisdn msisdn;
 
   private LocalDateTime activeFrom;

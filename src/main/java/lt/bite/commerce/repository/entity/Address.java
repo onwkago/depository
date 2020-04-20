@@ -13,7 +13,6 @@ import javax.persistence.*;
 @Entity
 @Table(name="Address",schema="ORDERS")
 public class Address {
-
   @Id
   @GeneratedValue(strategy= GenerationType.AUTO)
   @Generated
@@ -32,8 +31,5 @@ public class Address {
   private Integer postCode;
 
   private String addressType;
-
-  @ManyToOne
-  private Account account;
 
 }

@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
+import lt.bite.commerce.domain.model.CustomerDto;
+import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -30,8 +32,10 @@ public class Customer {
 
   private Integer personalCode;
 
-  @OneToMany(mappedBy = "id")
+  @OneToMany(mappedBy = "id", fetch=FetchType.LAZY)
   private List<Account> accounts;
+
+
 
 
 

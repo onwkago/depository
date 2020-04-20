@@ -1,15 +1,20 @@
 package lt.bite.commerce.controller.orders;
 
 import lt.bite.commerce.controller.ApiUrls;
+import lt.bite.commerce.domain.model.AddressDto;
 import lt.bite.commerce.domain.model.CustomerDto;
+import lt.bite.commerce.domain.model.OrderedServiceDto;
 import lt.bite.commerce.domain.service.CustomerService;
-import lt.bite.commerce.repository.entity.Customer;
+import lt.bite.commerce.domain.service.OrderService;
+import lt.bite.commerce.repository.entity.OrderedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.http.MediaType;
+import org.springframework.web.bind.annotation.*;
+
+import javax.print.attribute.standard.Media;
+import javax.validation.Valid;
+import java.util.List;
 
 @RestController
 @RequestMapping(produces= "application/json")
@@ -18,15 +23,36 @@ public class OrderController {
   @Autowired
   CustomerService customerService;
 
-  @GetMapping(Urls.GET_CUSTOMER)
-  public HttpEntity<CustomerDto> getCustomer(@RequestParam(name = "id") Long id) {
-    return customerService.getCustomerById(id);
+  @Autowired
+  OrderService orderService;
+
+
+  @PostMapping(path =Urls.GET_CUSTOMER,consumes = MediaType.APPLICATION_JSON_VALUE)
+  public HttpEntity<CustomerDto> getCustomer(@Valid @RequestBody CustomerDto customer) {
+    return customerService.getCustomerById(customer);
   }
+
+  @PostMapping(path = Urls.CANCEL_ORDER, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public HttpEntity<OrderedServiceDto> cancelOrder(@Valid @RequestBody OrderedServiceDto orderedService ) {
+    return orderService.cancelOrderedService(orderedService);
+  }
+
+  @PostMapping(path = Urls.NEW_ORDER, consumes = MediaType.APPLICATION_JSON_VALUE)
+  public HttpEntity<OrderedServiceDto> createOrder(@Valid @RequestBody OrderedServiceDto serviceToOrder) {
+    return orderService.orderService(serviceToOrder);
+  }
+
+  @GetMapping(path= Urls.GET_ACTIVE_ORDERS)
+  public HttpEntity<List<OrderedServiceDto>> getActiveOrders(@RequestParam(name="accountId") Long accountId) {
+    return orderService.getActiveOrders(accountId);
+  }
+
 
   public final static class Urls{
     private final static String ROOT_URL = ApiUrls.API_URL + "/service";
+    private final static String GET_ACTIVE_ORDERS = ApiUrls.API_URL + "/activeOrders";
     private final static String GET_CUSTOMER = ROOT_URL + "/getcustomer";
-    private final static String GET_ORDERS = ROOT_URL + "/getorders";
+    private final static String CANCEL_ORDER = ROOT_URL + "/cancelorder";
     private final static String NEW_ORDER = ROOT_URL + "/neworder";
   }
 }
