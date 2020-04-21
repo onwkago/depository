@@ -25,12 +25,6 @@ public class CustomerServiceImpl implements CustomerService {
   @Autowired
   CustomerRepository customerRepository;
 
-  @Autowired
-  OrderedServiceRepository orderedServiceRepository;
-
-  @Autowired
-  MsisdnRepository msisdnRepository;
-
   private ModelMapper mapper = new ModelMapper();
 
   @Override
