@@ -32,9 +32,6 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   OrderedServiceRepository orderedServiceRepository;
 
-  @Autowired
-  CustomerRepository customerRepository;
-
   public ResponseEntity<OrderedServiceDto> orderService(final OrderedServiceDto serviceToOrder) {
 
     OrderedService service = mapper.map(serviceToOrder, OrderedService.class);
