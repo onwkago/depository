@@ -12,8 +12,6 @@ public class OrderedServiceDto extends RepresentationModel<OrderedServiceDto> {
 
   private Service service;
 
-  private Msisdn msisdn;
-
   private LocalDateTime activeFrom;
 
   private LocalDateTime activeTo;

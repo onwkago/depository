@@ -1,18 +1,13 @@
 package lt.bite.commerce.domain.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 import lt.bite.commerce.repository.entity.Account;
 import org.springframework.hateoas.RepresentationModel;
 import javax.validation.constraints.NotNull;
 import java.util.List;
-@Getter
-@Setter
-@NoArgsConstructor
+
+@Data
 public class CustomerDto extends RepresentationModel<CustomerDto> {
-
-
 
   @NotNull(message="Please provide id")
   private long id;

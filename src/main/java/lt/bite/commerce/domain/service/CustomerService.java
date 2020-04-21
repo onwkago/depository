@@ -11,7 +11,7 @@ import java.util.Optional;
 @Service
 public interface CustomerService {
 
-  ResponseEntity<CustomerDto> getCustomerById(CustomerDto customer);
+  ResponseEntity<CustomerDto> getCustomerById(final CustomerDto customer);
 
 
 }

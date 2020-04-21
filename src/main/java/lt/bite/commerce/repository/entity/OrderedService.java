@@ -22,9 +22,6 @@ public class OrderedService {
   @OneToOne
   private Service service;
 
-  @OneToOne
-  private Msisdn msisdn;
-
   private LocalDateTime activeFrom;
 
   private LocalDateTime activeTo;

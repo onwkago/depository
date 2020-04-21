@@ -40,7 +40,7 @@ public class AddressController {
 
   public final static class Urls{
     private final static String ROOT_URL = ApiUrls.API_URL + "/address";
-    private final static String GET_ADDRESS = ApiUrls.API_URL + "/getaddress";
+    private final static String GET_ADDRESS = ROOT_URL + "/getaddress";
     private final static String ADDITIONAL_ADDRESS = ROOT_URL + "/additionalAddress";
     private final static String CHANGE_ADDRESS = ROOT_URL + "/changeAddress";
     private final static String REMOVE_ADDRESS = ROOT_URL + "/removeaddress";

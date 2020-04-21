@@ -2,13 +2,10 @@ package lt.bite.commerce.domain.service.impl;
 
 import lt.bite.commerce.controller.orders.OrderController;
 import lt.bite.commerce.domain.model.OrderedServiceDto;
-import lt.bite.commerce.domain.service.AccountService;
 import lt.bite.commerce.domain.service.OrderService;
-import lt.bite.commerce.repository.AccountRepository;
 import lt.bite.commerce.repository.CustomerRepository;
 import lt.bite.commerce.repository.MsisdnRepository;
 import lt.bite.commerce.repository.OrderedServiceRepository;
-import lt.bite.commerce.repository.entity.Account;
 import lt.bite.commerce.repository.entity.Msisdn;
 import lt.bite.commerce.repository.entity.OrderedService;
 import org.modelmapper.ModelMapper;
@@ -38,7 +35,7 @@ public class OrderServiceImpl implements OrderService {
   @Autowired
   CustomerRepository customerRepository;
 
-  public ResponseEntity<OrderedServiceDto> orderService(OrderedServiceDto serviceToOrder) {
+  public ResponseEntity<OrderedServiceDto> orderService(final OrderedServiceDto serviceToOrder) {
 
     OrderedService service = mapper.map(serviceToOrder,OrderedService.class);
 
@@ -48,7 +45,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public ResponseEntity<OrderedServiceDto> cancelOrderedService(OrderedServiceDto service) {
+  public ResponseEntity<OrderedServiceDto> cancelOrderedService(final OrderedServiceDto service) {
     service.setActiveTo(LocalDateTime.now());
     OrderedService serviceToCancel = mapper.map(service,OrderedService.class);
     orderedServiceRepository.save(serviceToCancel);
@@ -57,7 +54,7 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public ResponseEntity<List<OrderedServiceDto>> getActiveOrders(Long msisdnId) {
+  public ResponseEntity<List<OrderedServiceDto>> getActiveOrders(final Long msisdnId) {
     Optional<Msisdn> account = msisdnRepository.findById(msisdnId);
     List<OrderedServiceDto> activeServices = msisdnRepository.findById(msisdnId)
             .get()
@@ -73,9 +70,10 @@ public class OrderServiceImpl implements OrderService {
   }
 
   @Override
-  public ResponseEntity<OrderedServiceDto> getOrder(Long orderId) {
-    OrderedServiceDto order = mapper.map(orderedServiceRepository.findById(orderId),OrderedServiceDto.class);
+  public ResponseEntity<OrderedServiceDto> getOrder(final Long orderId) {
+    OrderedServiceDto order = mapper.map(orderedServiceRepository.findById(orderId).get(),OrderedServiceDto.class);
     order.add(linkTo(methodOn(OrderController.class).getOrder(order.getId())).withSelfRel());
     return new ResponseEntity<>(order,HttpStatus.OK);
   }
+
 }

@@ -9,11 +9,11 @@ import org.springframework.stereotype.Service;
 @Service
 public interface AddressService {
 
-  ResponseEntity<?> additionalAddress(AddressDto newAddress);
+  ResponseEntity<?> additionalAddress(final AddressDto newAddress);
 
-  ResponseEntity<?> removeAddress(AddressDto addressToRemove);
+  ResponseEntity<?> removeAddress(final AddressDto addressToRemove);
 
-  ResponseEntity<?> changeAddress(AddressDto addressToChange);
+  ResponseEntity<?> changeAddress(final AddressDto addressToChange);
 
-  ResponseEntity<?> getAddressById(Long id);
+  ResponseEntity<?> getAddressById(final Long id);
 }

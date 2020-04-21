@@ -10,11 +10,11 @@ import java.util.List;
 @Service
 public interface OrderService {
 
-  ResponseEntity<OrderedServiceDto> orderService(OrderedServiceDto serviceToOrder);
+  ResponseEntity<OrderedServiceDto> orderService(final OrderedServiceDto serviceToOrder);
 
-  ResponseEntity<OrderedServiceDto>  cancelOrderedService(OrderedServiceDto customer);
+  ResponseEntity<OrderedServiceDto>  cancelOrderedService(final OrderedServiceDto customer);
 
-  ResponseEntity<List<OrderedServiceDto>> getActiveOrders(Long accountId);
+  ResponseEntity<List<OrderedServiceDto>> getActiveOrders(final Long accountId);
 
-  ResponseEntity<OrderedServiceDto> getOrder(Long orderId);
+  ResponseEntity<OrderedServiceDto> getOrder(final Long orderId);
 }

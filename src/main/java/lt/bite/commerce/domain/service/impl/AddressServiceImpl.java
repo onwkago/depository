@@ -1,5 +1,7 @@
 package lt.bite.commerce.domain.service.impl;
 
+import lombok.extern.log4j.Log4j;
+import lombok.extern.slf4j.Slf4j;
 import lt.bite.commerce.controller.orders.AddressController;
 import lt.bite.commerce.domain.model.AddressDto;
 import lt.bite.commerce.domain.service.AddressService;
@@ -17,7 +19,7 @@ import static lt.bite.commerce.util.Constants.ADDRESS_TYPE_SECONDARY;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
-
+@Slf4j
 @Service
 public class AddressServiceImpl implements AddressService {
 
@@ -49,7 +51,7 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
-  public ResponseEntity<?> changeAddress(AddressDto addressToChange) {
+  public ResponseEntity<?> changeAddress(final AddressDto addressToChange) {
     Address address = mapper.map(addressToChange, Address.class);
 
     AddressDto changedAddress = mapper.map(addressRepository.save(address), AddressDto.class);
@@ -61,10 +63,10 @@ public class AddressServiceImpl implements AddressService {
   }
 
   @Override
-  public ResponseEntity<AddressDto> getAddressById(Long id) {
-    AddressDto address = mapper.map(addressRepository.findById(id), AddressDto.class)
+  public ResponseEntity<AddressDto> getAddressById(final Long id) {
+    AddressDto address = mapper.map(addressRepository.findById(id).get(), AddressDto.class)
             .add(linkTo(methodOn(AddressController.class).getAddress(id)).withSelfRel());
-
+    log.debug(address.toString());
     return new ResponseEntity<>(address, HttpStatus.OK);
   }
 }

@@ -1,5 +1,6 @@
 package lt.bite.commerce.domain.service.impl;
 
+import lt.bite.commerce.controller.orders.AccountController;
 import lt.bite.commerce.controller.orders.OrderController;
 
 import lt.bite.commerce.domain.model.CustomerDto;
@@ -13,6 +14,9 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
+import java.util.stream.Collectors;
+
+import static lt.bite.commerce.util.Constants.ACCOUNTS;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
 
@@ -35,18 +39,13 @@ public class CustomerServiceImpl implements CustomerService {
     CustomerDto cust = mapper.map(customerRepository.findById(customer.getId()).get(),CustomerDto.class);
       cust.add(linkTo(methodOn(OrderController.class).getCustomer(customer)).withSelfRel());
 
+      cust.add(cust.getAccounts()
+              .stream()
+              .map(a -> linkTo(methodOn(AccountController.class).getAccount(a.getId())).withRel(ACCOUNTS))
+              .collect(Collectors.toList())
+      );
+
     return new ResponseEntity<>(cust, HttpStatus.OK);
   }
-
-
-
-
-//  public ResponseEntity<OrderedServiceDto> cancelOrder(final AccountDto account) {
-//
-//    return new ResponseEntity<>(account,HttpStatus.ACCEPTED);
-//  }
-
-
-
 
 }

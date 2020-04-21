@@ -1,18 +1,15 @@
 package lt.bite.commerce.controller.orders;
 
 import lt.bite.commerce.controller.ApiUrls;
-import lt.bite.commerce.domain.model.AddressDto;
 import lt.bite.commerce.domain.model.CustomerDto;
 import lt.bite.commerce.domain.model.OrderedServiceDto;
 import lt.bite.commerce.domain.service.CustomerService;
 import lt.bite.commerce.domain.service.OrderService;
-import lt.bite.commerce.repository.entity.OrderedService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpEntity;
 import org.springframework.http.MediaType;
 import org.springframework.web.bind.annotation.*;
 
-import javax.print.attribute.standard.Media;
 import javax.validation.Valid;
 import java.util.List;
 
@@ -55,8 +52,8 @@ public class OrderController {
 
   public final static class Urls{
     private final static String ROOT_URL = ApiUrls.API_URL + "/service";
-    private final static String GET_ORDER = ApiUrls.API_URL + "/order";
-    private final static String GET_ACTIVE_ORDERS = ApiUrls.API_URL + "/activeOrders";
+    private final static String GET_ORDER = ROOT_URL + "/order";
+    private final static String GET_ACTIVE_ORDERS = ROOT_URL + "/activeOrders";
     private final static String GET_CUSTOMER = ROOT_URL + "/getcustomer";
     private final static String CANCEL_ORDER = ROOT_URL + "/cancelorder";
     private final static String NEW_ORDER = ROOT_URL + "/neworder";
