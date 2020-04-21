@@ -12,21 +12,19 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Account",schema="ORDERS")
+@Table(name = "Account", schema = "ORDERS")
 public class Account {
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Generated
   private long id;
 
   private String name;
 
-  @OneToMany(mappedBy = "id")
+  @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
   private List<Address> addresses;
 
   @OneToMany(mappedBy = "id")
   private List<Msisdn> msisdnList;
 
-  @ManyToOne
-  private Customer customer;
 }
