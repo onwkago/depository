@@ -29,7 +29,7 @@ public class OrderController {
     return customerService.getCustomerById(customer);
   }
 
-  @PostMapping(path = Urls.CANCEL_ORDER, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(path = Urls.CANCEL_ORDER, consumes = MediaType.APPLICATION_JSON_VALUE)
   public HttpEntity<OrderedServiceDto> cancelOrder(@Valid @RequestBody OrderedServiceDto orderedService ) {
     return orderService.cancelOrderedService(orderedService);
   }

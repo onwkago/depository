@@ -22,12 +22,12 @@ public class AddressController {
     return addressService.additionalAddress(newAddress);
   }
 
-  @PostMapping(path = Urls.CHANGE_ADDRESS, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @PutMapping(path = Urls.CHANGE_ADDRESS, consumes = MediaType.APPLICATION_JSON_VALUE)
   public HttpEntity<?> changeAddress(@Valid @RequestBody AddressDto addressToChange) {
     return addressService.changeAddress(addressToChange);
   }
 
-  @PostMapping(path = Urls.REMOVE_ADDRESS, consumes = MediaType.APPLICATION_JSON_VALUE)
+  @DeleteMapping(path = Urls.REMOVE_ADDRESS, consumes = MediaType.APPLICATION_JSON_VALUE)
     public HttpEntity<?> removeAddress(@Valid @RequestBody AddressDto addressToRemove) {
     return addressService.removeAddress(addressToRemove);
     }
