@@ -27,7 +27,7 @@ public class MsisdnController {
   }
 
   @PutMapping(path = Urls.ADDITIONAL_PHONE_NO)
-  public HttpEntity<?> additionalPhoneNo(@Valid @RequestBody MsisdnDto additionalPhoneNo) {
+  public HttpEntity<?> additionalPhoneNo(@RequestBody MsisdnDto additionalPhoneNo) {
     return msisdnService.additionalPhoneNo(additionalPhoneNo);
   }
 

@@ -18,7 +18,7 @@ public class AddressController {
   AddressService addressService;
 
   @PostMapping(path = Urls.ADDITIONAL_ADDRESS, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public HttpEntity<?> additionalAddress(@Valid @RequestBody AddressDto newAddress) {
+  public HttpEntity<?> additionalAddress(@RequestBody AddressDto newAddress) {
     return addressService.additionalAddress(newAddress);
   }
 

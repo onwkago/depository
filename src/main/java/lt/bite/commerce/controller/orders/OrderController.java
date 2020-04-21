@@ -27,7 +27,7 @@ public class OrderController {
   }
 
   @PostMapping(path = Urls.NEW_ORDER, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public HttpEntity<OrderedServiceDto> createOrder(@Valid @RequestBody OrderedServiceDto serviceToOrder) {
+  public HttpEntity<OrderedServiceDto> createOrder(@RequestBody OrderedServiceDto serviceToOrder) {
     return orderService.orderService(serviceToOrder);
   }
 
