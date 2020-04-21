@@ -37,4 +37,4 @@ mvnw
 mvnw.cmd
 
 ### logs directory ###
-/logs
+logs/
