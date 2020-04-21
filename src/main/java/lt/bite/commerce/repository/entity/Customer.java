@@ -4,8 +4,6 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.Generated;
 import lombok.NoArgsConstructor;
-import lt.bite.commerce.domain.model.CustomerDto;
-import org.modelmapper.ModelMapper;
 
 import javax.persistence.*;
 import java.util.List;
@@ -14,11 +12,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Customer",schema="ORDERS")
+@Table(name = "Customer", schema = "ORDERS")
 public class Customer {
 
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Generated
   private long id;
 
@@ -32,11 +30,8 @@ public class Customer {
 
   private Integer personalCode;
 
-  @OneToMany(mappedBy = "id", fetch=FetchType.LAZY)
+  @OneToMany(mappedBy = "id", fetch = FetchType.LAZY)
   private List<Account> accounts;
-
-
-
 
 
 }

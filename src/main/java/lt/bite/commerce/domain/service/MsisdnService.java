@@ -14,7 +14,4 @@ public interface MsisdnService {
   ResponseEntity<?> additionalPhoneNo(MsisdnDto phoneToAdd);
 
   ResponseEntity<?> removePhoneNo(MsisdnDto phoneToRemmove);
-
-
-
 }

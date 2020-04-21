@@ -4,6 +4,7 @@ import lombok.Data;
 import lt.bite.commerce.repository.entity.Address;
 import lt.bite.commerce.repository.entity.Msisdn;
 import org.springframework.hateoas.RepresentationModel;
+
 import java.util.List;
 
 @Data

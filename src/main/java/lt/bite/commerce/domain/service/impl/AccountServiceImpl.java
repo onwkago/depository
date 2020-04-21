@@ -24,6 +24,7 @@ import static lt.bite.commerce.util.Constants.ADDRESSES;
 import static lt.bite.commerce.util.Constants.MSISDNS;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.linkTo;
 import static org.springframework.hateoas.server.mvc.WebMvcLinkBuilder.methodOn;
+
 @Service
 public class AccountServiceImpl implements AccountService {
 
@@ -37,36 +38,36 @@ public class AccountServiceImpl implements AccountService {
 
   @Override
   public ResponseEntity<AccountDto> getAccountById(final Long accountId) {
-    AccountDto account = mapper.map(accountRepository.findById(accountId).get(),AccountDto.class);
+    AccountDto account = mapper.map(accountRepository.findById(accountId).get(), AccountDto.class);
 
     account.add(linkTo(methodOn(AccountController.class).getAccount(account.getId())).withSelfRel());
     account.add(account.getAddresses()
-                .stream()
-                .map(a -> linkTo(methodOn(AddressController.class).getAddress(a.getId())).withRel(ADDRESSES))
-                .collect(Collectors.toList())
+            .stream()
+            .map(a -> linkTo(methodOn(AddressController.class).getAddress(a.getId())).withRel(ADDRESSES))
+            .collect(Collectors.toList())
     );
     account.add(account.getMsisdnList()
-                .stream()
-                .map(m -> linkTo(methodOn(MsisdnController.class).getPhoneNo(m.getId())).withRel(MSISDNS))
-                .collect(Collectors.toList())
+            .stream()
+            .map(m -> linkTo(methodOn(MsisdnController.class).getPhoneNo(m.getId())).withRel(MSISDNS))
+            .collect(Collectors.toList())
     );
     return new ResponseEntity<>(account, HttpStatus.OK);
   }
 
   @Override
   public ResponseEntity<?> updateAccount(final AccountDto accountToUpdate) {
-    accountRepository.save(mapper.map(accountToUpdate,Account.class));
+    accountRepository.save(mapper.map(accountToUpdate, Account.class));
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
   @Override
   public ResponseEntity<?> removeAccount(final AccountDto accountToRemove) {
-    accountRepository.delete(mapper.map(accountToRemove,Account.class));
+    accountRepository.delete(mapper.map(accountToRemove, Account.class));
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
   }
 
   public ResponseEntity<List<AccountDto>> getCustomerAccounts(final Long customerId) {
-    Optional<Customer> customer  = customerRepository.findById(customerId);
+    Optional<Customer> customer = customerRepository.findById(customerId);
     List<AccountDto> accounts = customer
             .get()
             .getAccounts()
@@ -75,6 +76,6 @@ public class AccountServiceImpl implements AccountService {
                     .add(linkTo(methodOn(AccountController.class).getAccount(a.getId())).withRel(ACCOUNTS)))
             .collect(Collectors.toList());
 
-    return new ResponseEntity<>(accounts,HttpStatus.OK);
+    return new ResponseEntity<>(accounts, HttpStatus.OK);
   }
 }

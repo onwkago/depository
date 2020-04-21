@@ -10,14 +10,14 @@ import org.springframework.web.bind.annotation.*;
 import javax.validation.Valid;
 
 @RestController
-@RequestMapping(produces= "application/json")
+@RequestMapping(produces = "application/json")
 public class MsisdnController {
 
   @Autowired
   MsisdnService msisdnService;
 
   @GetMapping(path = Urls.GET_PHONE_NO)
-  public HttpEntity<MsisdnDto> getPhoneNo(@RequestParam(name="phoneidno") Long id) {
+  public HttpEntity<MsisdnDto> getPhoneNo(@RequestParam(name = "phoneidno") Long id) {
     return msisdnService.getPhoneNo(id);
   }
 
@@ -36,7 +36,7 @@ public class MsisdnController {
     return msisdnService.removePhoneNo(phoneNoToRemove);
   }
 
-  public final static class Urls{
+  public final static class Urls {
     private final static String ROOT_URL = ApiUrls.API_URL + "/sim";
     private final static String ADDITIONAL_PHONE_NO = ROOT_URL + "/addphoneno";
     private final static String CHANGE_PHONE_NO = ROOT_URL + "/changephoneno";

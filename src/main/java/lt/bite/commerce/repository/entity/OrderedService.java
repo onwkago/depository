@@ -12,10 +12,10 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="OrderedService",schema="ORDERS")
+@Table(name = "OrderedService", schema = "ORDERS")
 public class OrderedService {
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Generated
   private long id;
 

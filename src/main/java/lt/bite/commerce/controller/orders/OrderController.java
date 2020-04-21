@@ -14,23 +14,15 @@ import javax.validation.Valid;
 import java.util.List;
 
 @RestController
-@RequestMapping(produces= "application/json")
+@RequestMapping(produces = "application/json")
 public class OrderController {
 
-  @Autowired
-  CustomerService customerService;
 
   @Autowired
   OrderService orderService;
 
-
-  @PostMapping(path =Urls.GET_CUSTOMER,consumes = MediaType.APPLICATION_JSON_VALUE)
-  public HttpEntity<CustomerDto> getCustomer(@Valid @RequestBody CustomerDto customer) {
-    return customerService.getCustomerById(customer);
-  }
-
   @PutMapping(path = Urls.CANCEL_ORDER, consumes = MediaType.APPLICATION_JSON_VALUE)
-  public HttpEntity<OrderedServiceDto> cancelOrder(@Valid @RequestBody OrderedServiceDto orderedService ) {
+  public HttpEntity<OrderedServiceDto> cancelOrder(@Valid @RequestBody OrderedServiceDto orderedService) {
     return orderService.cancelOrderedService(orderedService);
   }
 
@@ -39,18 +31,18 @@ public class OrderController {
     return orderService.orderService(serviceToOrder);
   }
 
-  @GetMapping(path= Urls.GET_ACTIVE_ORDERS)
-  public HttpEntity<List<OrderedServiceDto>> getActiveOrders(@RequestParam(name="accountId") Long accountId) {
+  @GetMapping(path = Urls.GET_ACTIVE_ORDERS)
+  public HttpEntity<List<OrderedServiceDto>> getActiveOrders(@RequestParam(name = "accountId") Long accountId) {
     return orderService.getActiveOrders(accountId);
   }
 
-  @GetMapping(path= Urls.GET_ORDER)
-  public HttpEntity<OrderedServiceDto> getOrder(@RequestParam(name="orderId") Long orderId) {
+  @GetMapping(path = Urls.GET_ORDER)
+  public HttpEntity<OrderedServiceDto> getOrder(@RequestParam(name = "orderId") Long orderId) {
     return orderService.getOrder(orderId);
   }
 
 
-  public final static class Urls{
+  public final static class Urls {
     private final static String ROOT_URL = ApiUrls.API_URL + "/service";
     private final static String GET_ORDER = ROOT_URL + "/order";
     private final static String GET_ACTIVE_ORDERS = ROOT_URL + "/activeOrders";

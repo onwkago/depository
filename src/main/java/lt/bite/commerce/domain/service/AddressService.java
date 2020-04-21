@@ -1,8 +1,6 @@
 package lt.bite.commerce.domain.service;
 
 import lt.bite.commerce.domain.model.AddressDto;
-import lt.bite.commerce.repository.AddressRepository;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 

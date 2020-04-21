@@ -6,6 +6,7 @@ import lt.bite.commerce.repository.entity.Service;
 import org.springframework.hateoas.RepresentationModel;
 
 import java.time.LocalDateTime;
+
 @Data
 public class OrderedServiceDto extends RepresentationModel<OrderedServiceDto> {
   private long id;

@@ -33,7 +33,7 @@ public class AddressServiceImpl implements AddressService {
     newAddress.setAddressType(ADDRESS_TYPE_SECONDARY);
     Address address = mapper.map(newAddress, Address.class);
 
-    AddressDto addedAddress = mapper.map(addressRepository.save(address),AddressDto.class);
+    AddressDto addedAddress = mapper.map(addressRepository.save(address), AddressDto.class);
     addedAddress.add(linkTo(methodOn(AddressController.class)
             .getAddress(addedAddress.getId())).withSelfRel());
 

@@ -37,7 +37,7 @@ public class OrderServiceImpl implements OrderService {
 
   public ResponseEntity<OrderedServiceDto> orderService(final OrderedServiceDto serviceToOrder) {
 
-    OrderedService service = mapper.map(serviceToOrder,OrderedService.class);
+    OrderedService service = mapper.map(serviceToOrder, OrderedService.class);
 
     orderedServiceRepository.save(service);
 
@@ -47,7 +47,7 @@ public class OrderServiceImpl implements OrderService {
   @Override
   public ResponseEntity<OrderedServiceDto> cancelOrderedService(final OrderedServiceDto service) {
     service.setActiveTo(LocalDateTime.now());
-    OrderedService serviceToCancel = mapper.map(service,OrderedService.class);
+    OrderedService serviceToCancel = mapper.map(service, OrderedService.class);
     orderedServiceRepository.save(serviceToCancel);
 
     return new ResponseEntity<>(HttpStatus.NO_CONTENT);
@@ -62,18 +62,18 @@ public class OrderServiceImpl implements OrderService {
             .stream()
             .filter(m -> m.getActiveTo() != null)
             .filter(m -> m.getActiveTo().isBefore(LocalDateTime.now()))
-            .map(m -> mapper.map(m,OrderedServiceDto.class)
+            .map(m -> mapper.map(m, OrderedServiceDto.class)
                     .add(linkTo(methodOn(OrderController.class).getOrder(m.getId())).withSelfRel()))
             .collect(Collectors.toList());
 
-    return new ResponseEntity<>(activeServices,HttpStatus.OK);
+    return new ResponseEntity<>(activeServices, HttpStatus.OK);
   }
 
   @Override
   public ResponseEntity<OrderedServiceDto> getOrder(final Long orderId) {
-    OrderedServiceDto order = mapper.map(orderedServiceRepository.findById(orderId).get(),OrderedServiceDto.class);
+    OrderedServiceDto order = mapper.map(orderedServiceRepository.findById(orderId).get(), OrderedServiceDto.class);
     order.add(linkTo(methodOn(OrderController.class).getOrder(order.getId())).withSelfRel());
-    return new ResponseEntity<>(order,HttpStatus.OK);
+    return new ResponseEntity<>(order, HttpStatus.OK);
   }
 
 }

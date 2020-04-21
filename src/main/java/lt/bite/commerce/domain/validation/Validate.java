@@ -1,7 +1,6 @@
 package lt.bite.commerce.domain.validation;
 
 import lt.bite.commerce.domain.model.CustomerDto;
-import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Component;
 import org.springframework.validation.Errors;
@@ -22,11 +21,11 @@ public class Validate implements Validator {
   @ExceptionHandler(NoSuchElementException.class)
   public Map<String, String> handleValidationExceptions(
           MethodArgumentNotValidException ex) {
-    Map<String,String> errors = new HashMap<>();
+    Map<String, String> errors = new HashMap<>();
     ex.getBindingResult().getAllErrors().forEach((error) -> {
       String fieldName = ((FieldError) error).getField();
       String errorMessage = error.getDefaultMessage();
-      errors.put(fieldName,errorMessage);
+      errors.put(fieldName, errorMessage);
     });
     return errors;
   }

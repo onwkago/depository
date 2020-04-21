@@ -1,7 +1,6 @@
 package lt.bite.commerce.domain.service.impl;
 
 import lt.bite.commerce.controller.orders.ServicesController;
-import lt.bite.commerce.domain.model.OrderedServiceDto;
 import lt.bite.commerce.domain.model.ServiceDto;
 import lt.bite.commerce.domain.service.ServicesService;
 import lt.bite.commerce.repository.ServiceRepository;
@@ -11,7 +10,6 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
-import java.util.Arrays;
 import java.util.List;
 import java.util.stream.Collectors;
 import java.util.stream.StreamSupport;
@@ -30,9 +28,9 @@ public class ServicesServiceImpl implements ServicesService {
 
   @Override
   public ResponseEntity<ServiceDto> getServiceById(Long id) {
-   ServiceDto service = mapper.map(servicesRepository.findById(id).get(),ServiceDto.class);
-   service.add(linkTo(methodOn(ServicesController.class).getService(id)).withSelfRel());
-   return new ResponseEntity<>(service,HttpStatus.OK);
+    ServiceDto service = mapper.map(servicesRepository.findById(id).get(), ServiceDto.class);
+    service.add(linkTo(methodOn(ServicesController.class).getService(id)).withSelfRel());
+    return new ResponseEntity<>(service, HttpStatus.OK);
   }
 
   @Override

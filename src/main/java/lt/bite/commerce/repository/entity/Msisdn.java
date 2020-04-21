@@ -13,11 +13,11 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name="Msisdn",schema="ORDERS")
+@Table(name = "Msisdn", schema = "ORDERS")
 public class Msisdn {
 
   @Id
-  @GeneratedValue(strategy= GenerationType.AUTO)
+  @GeneratedValue(strategy = GenerationType.AUTO)
   @Generated
   private long id;
 

@@ -1,8 +1,7 @@
 package lt.bite.commerce.domain.service.impl;
 
 import lt.bite.commerce.controller.orders.AccountController;
-import lt.bite.commerce.controller.orders.OrderController;
-
+import lt.bite.commerce.controller.orders.CustomerController;
 import lt.bite.commerce.domain.model.CustomerDto;
 import lt.bite.commerce.domain.service.CustomerService;
 import lt.bite.commerce.repository.CustomerRepository;
@@ -36,14 +35,14 @@ public class CustomerServiceImpl implements CustomerService {
 
   @Override
   public ResponseEntity<CustomerDto> getCustomerById(final CustomerDto customer) {
-    CustomerDto cust = mapper.map(customerRepository.findById(customer.getId()).get(),CustomerDto.class);
-      cust.add(linkTo(methodOn(OrderController.class).getCustomer(customer)).withSelfRel());
+    CustomerDto cust = mapper.map(customerRepository.findById(customer.getId()).get(), CustomerDto.class);
+    cust.add(linkTo(methodOn(CustomerController.class).getCustomer(customer)).withSelfRel());
 
-      cust.add(cust.getAccounts()
-              .stream()
-              .map(a -> linkTo(methodOn(AccountController.class).getAccount(a.getId())).withRel(ACCOUNTS))
-              .collect(Collectors.toList())
-      );
+    cust.add(cust.getAccounts()
+            .stream()
+            .map(a -> linkTo(methodOn(AccountController.class).getAccount(a.getId())).withRel(ACCOUNTS))
+            .collect(Collectors.toList())
+    );
 
     return new ResponseEntity<>(cust, HttpStatus.OK);
   }

@@ -4,7 +4,7 @@ import lombok.Data;
 import org.springframework.hateoas.RepresentationModel;
 
 @Data
-public class AddressDto  extends RepresentationModel<AddressDto> {
+public class AddressDto extends RepresentationModel<AddressDto> {
 
   private long id;
 

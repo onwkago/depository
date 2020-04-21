@@ -1,7 +1,6 @@
 package lt.bite.commerce.domain.service;
 
 import lt.bite.commerce.domain.model.OrderedServiceDto;
-import lt.bite.commerce.repository.entity.OrderedService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
@@ -12,7 +11,7 @@ public interface OrderService {
 
   ResponseEntity<OrderedServiceDto> orderService(final OrderedServiceDto serviceToOrder);
 
-  ResponseEntity<OrderedServiceDto>  cancelOrderedService(final OrderedServiceDto customer);
+  ResponseEntity<OrderedServiceDto> cancelOrderedService(final OrderedServiceDto customer);
 
   ResponseEntity<List<OrderedServiceDto>> getActiveOrders(final Long accountId);
 
